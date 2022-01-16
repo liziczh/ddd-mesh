@@ -15,21 +15,5 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-dao</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-mq</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-ref</artifactId>
-        </dependency>
     </dependencies>
 </project>

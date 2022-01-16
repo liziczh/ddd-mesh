@@ -31,6 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
         <spring-boot.version>2.6.2</spring-boot.version>
+        <ddd-mesh-api.version>1.0.0-SNAPSHOT</ddd-mesh-api.version>
     </properties>
 
     <!--依赖管理-->
@@ -40,7 +41,7 @@
             <dependency>
                 <groupId>com.liziczh</groupId>
                 <artifactId>ddd-mesh-api</artifactId>
-                <version>${project.version}</version>
+                <version>${ddd-mesh-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.liziczh</groupId>
