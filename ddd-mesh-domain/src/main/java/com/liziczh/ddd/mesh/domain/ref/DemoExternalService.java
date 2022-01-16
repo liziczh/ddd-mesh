@@ -1,7 +1,7 @@
-package com.liziczh.ddd.mesh.domain.external;
+package com.liziczh.ddd.mesh.domain.ref;
 
-import com.liziczh.ddd.mesh.domain.vo.DemoExternalVO;
-import com.liziczh.ddd.mesh.domain.vo.DemoVO;
+import com.liziczh.ddd.mesh.domain.data.DemoExternalDO;
+import com.liziczh.ddd.mesh.domain.data.DemoDO;
 
 /**
  * 外部服务调用
@@ -20,6 +20,6 @@ public interface DemoExternalService {
      * @author chenzhehao
      * @date 2021/7/18 1:50
      */
-    DemoExternalVO callExternalService(DemoVO demoVO);
+    DemoExternalDO callExternalService(DemoDO demoDO);
 
 }

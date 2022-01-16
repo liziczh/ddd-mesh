@@ -4,7 +4,8 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.liziczh.base.common.util.HostUtils;
+
+import com.liziczh.ddd.mesh.common.util.HostUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

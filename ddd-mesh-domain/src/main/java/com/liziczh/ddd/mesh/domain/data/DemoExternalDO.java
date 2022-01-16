@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.domain.vo;
+package com.liziczh.ddd.mesh.domain.data;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  * @date 2021/7/18 0:24
  */
 @Data
-public class DemoVO {
+public class DemoExternalDO {
 
     private String name;
 

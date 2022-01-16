@@ -1,68 +1,71 @@
 package com.liziczh.ddd.mesh.api.service;
 
-import com.liziczh.ddd.mesh.api.condition.DemoCondition;
+import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
+import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.api.dto.DemoDTO;
-import com.liziczh.ddd.mesh.common.service.BaseService;
+import com.liziczh.ddd.mesh.api.response.Result;
 
 import java.util.List;
 
-public interface DemoService extends BaseService {
-    /**
-     * 分页查询
-     *
-     * @param condition 条件
-     * @return List<TDemo>
-     * @throws Exception 异常
-     */
-    List<DemoDTO> selectPage(DemoCondition condition) throws Exception;
+public interface DemoService {
 
     /**
-     * 条件查询
+     * 分页条件查询
      *
-     * @param condition 条件
-     * @return List<TDemo>
-     * @throws Exception 异常
+     * @param req
+     * @return java.util.List<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+     * @author chenzhehao
+     * @date 2022/1/17 12:37 上午
      */
-    List<DemoDTO> selectByCondition(DemoCondition condition) throws Exception;
+    Result<List<DemoDTO>> queryPage(DemoQueryReq req) throws Exception;
+
+    /**
+     * 查询单个实体信息
+     *
+     * @param demoId
+     * @return com.liziczh.ddd.mesh.api.dto.DemoDTO
+     * @author chenzhehao
+     * @date 2022/1/17 12:41 上午
+     */
+    Result<DemoDTO> getDemo(Long demoId) throws Exception;
 
     /**
      * 新增实体
      *
-     * @param demo 实体
-     * @return pk
-     * @throws Exception
+     * @param req
+     * @return java.lang.Integer
+     * @author chenzhehao
+     * @date 2022/1/17 12:41 上午
      */
-    Integer addDemo(DemoDTO demo) throws Exception;
+    Result<DemoDTO> addDemo(DemoCommandReq req) throws Exception;
 
     /**
      * 更新实体
      *
-     * @param demo 实体
-     * @throws Exception 异常
+     * @param demo
+     * @return com.liziczh.ddd.mesh.api.response.Result<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+     * @author chenzhehao
+     * @date 2022/1/17 12:53 上午
      */
-    void updateDemo(DemoDTO demo) throws Exception;
+    Result<DemoDTO> updateDemo(DemoCommandReq demo) throws Exception;
+
+   /**
+    * 删除实体
+    *
+    * @param demoId
+    * @return com.liziczh.ddd.mesh.api.response.Result<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+    * @author chenzhehao
+    * @date 2022/1/17 12:53 上午
+    */
+    Result<DemoDTO> deleteDemo(Long demoId) throws Exception;
 
     /**
-     * 查询单个实体
+     * 外部服务调用测试
      *
-     * @param id id
-     * @return TDemo
-     * @throws Exception 异常
+     * @param
+     * @return java.lang.String
+     * @author chenzhehao
+     * @date 2022/1/17 12:53 上午
      */
-    DemoDTO getDemo(String id) throws Exception;
-
-    /**
-     * 删除实体
-     *
-     * @param id id
-     * @throws Exception 异常
-     */
-    void deleteDemo(String id) throws Exception;
-
-    /**
-     * REF测试
-     *
-     * @return helloworld
-     */
-    String refHello();
+    Result<String> refTest();
 }

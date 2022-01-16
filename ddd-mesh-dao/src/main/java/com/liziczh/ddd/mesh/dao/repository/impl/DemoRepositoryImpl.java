@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.liziczh.ddd.mesh.api.condition.DemoCondition;
-import com.liziczh.ddd.mesh.common.condition.PageCondition;
-import com.liziczh.ddd.mesh.common.condition.SortCondition;
+import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
+import com.liziczh.ddd.mesh.api.condition.PageCondition;
+import com.liziczh.ddd.mesh.api.condition.SortCondition;
 import com.liziczh.ddd.mesh.common.enums.DeletedEnum;
 import com.liziczh.ddd.mesh.dao.mapper.TDemoMapper;
 import com.liziczh.ddd.mesh.dao.po.DemoPO;
@@ -32,7 +32,7 @@ public class DemoRepositoryImpl implements DemoRepository {
     private TDemoMapper demoMapper;
 
     @Override
-    public List<DemoEntity> selectByCondition(DemoCondition condition) {
+    public List<DemoEntity> selectByCondition(DemoQueryReq condition) {
 
         PageCondition pageCondition = condition.getPage();
         List<SortCondition> sortConditionList = condition.getSortList();

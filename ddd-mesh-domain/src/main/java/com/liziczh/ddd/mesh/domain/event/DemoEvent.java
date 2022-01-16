@@ -1,6 +1,6 @@
 package com.liziczh.ddd.mesh.domain.event;
 
-import com.liziczh.ddd.mesh.domain.vo.DemoEventVO;
+import com.liziczh.ddd.mesh.domain.data.DemoEventDO;
 
 /**
  * 事件
@@ -18,6 +18,6 @@ public interface DemoEvent {
      * @author chenzhehao
      * @date 2021/7/18 1:46
      */
-    void publishEvent(DemoEventVO eventVO);
+    void publishEvent(DemoEventDO eventVO);
 
 }

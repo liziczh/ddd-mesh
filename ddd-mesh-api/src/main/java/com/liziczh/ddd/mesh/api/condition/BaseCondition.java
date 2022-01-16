@@ -1,22 +1,20 @@
-package com.liziczh.ddd.mesh.common.condition;
+package com.liziczh.ddd.mesh.api.condition;
 
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
- * common
+ * 基础查询条件
  *
  * @author chenzhehao
  * @version 1.0
  * @description
- * @date 2021/7/17 21:52
+ * @date 2022/1/16 12:11 上午
  */
 @Data
-public abstract class BaseCondition implements Serializable {
-    private static final long serialVersionUID = 5582629689714183859L;
+public abstract class BaseCondition {
     private PageCondition page;
     private List<SortCondition> sortList;
     private Date startTime;

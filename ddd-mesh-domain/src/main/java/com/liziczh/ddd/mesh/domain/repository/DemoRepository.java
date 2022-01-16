@@ -1,6 +1,6 @@
 package com.liziczh.ddd.mesh.domain.repository;
 
-import com.liziczh.ddd.mesh.api.condition.DemoCondition;
+import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public interface DemoRepository {
      * @author chenzhehao
      * @date 2021/7/18 0:38
      */
-    List<DemoEntity> selectByCondition(DemoCondition condition);
+    List<DemoEntity> selectByCondition(DemoQueryReq condition);
 
     /**
      * ID查询

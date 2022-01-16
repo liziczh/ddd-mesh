@@ -1,11 +1,9 @@
-package com.liziczh.ddd.mesh.common.condition;
+package com.liziczh.ddd.mesh.api.condition;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
- * common
+ * 分页查询条件
  *
  * @author chenzhehao
  * @version 1.0
@@ -13,10 +11,9 @@ import java.io.Serializable;
  * @date 2021/7/17 21:52
  */
 @Data
-public class PageCondition implements Serializable {
-    private static final long serialVersionUID = 1487852855435923600L;
+public class PageCondition {
     private Integer pageNo = 1;
-    private Integer size = 20;
+    private Integer size = 10;
 
     public PageCondition pageNo(Integer pageNo) {
         this.pageNo = pageNo;

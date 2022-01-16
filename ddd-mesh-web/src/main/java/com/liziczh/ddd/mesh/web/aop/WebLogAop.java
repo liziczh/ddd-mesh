@@ -88,7 +88,7 @@ public class WebLogAop {
         // 执行方法
         Object result = proceedingJoinPoint.proceed();
         // 打印出参
-        log.info("Response Args  : {}", JsonUtils.toJson(result));
+        log.info("Result Args  : {}", JsonUtils.toJson(result));
         // 执行耗时
         log.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime);
         // 接口结束
