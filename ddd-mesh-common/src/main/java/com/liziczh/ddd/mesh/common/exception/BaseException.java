@@ -12,25 +12,16 @@ import lombok.Data;
  */
 @Data
 public abstract class BaseException extends RuntimeException {
-
+    private static final long serialVersionUID = -6526269878339159057L;
     private String code;
 
     public BaseException() {
         super();
     }
 
-    public BaseException(String code, String message, Throwable cause) {
-        super(message, cause);
-        this.code = code;
-    }
-
     public BaseException(String code, String message) {
         super(message);
         this.code = code;
-    }
-
-    public BaseException(String message, Throwable cause) {
-        super(message, cause);
     }
 
     public BaseException(String message) {
@@ -39,5 +30,14 @@ public abstract class BaseException extends RuntimeException {
 
     public BaseException(Throwable cause) {
         super(cause);
+    }
+
+    public BaseException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BaseException(String code, String message, Throwable cause) {
+        super(message, cause);
+        this.code = code;
     }
 }

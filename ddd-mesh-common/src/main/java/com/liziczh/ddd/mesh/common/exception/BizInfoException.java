@@ -1,10 +1,6 @@
 package com.liziczh.ddd.mesh.common.exception;
 
 /**
- * 用户操作异常
- */
-
-/**
  * 业务INFO异常
  *
  * @author chenzhehao

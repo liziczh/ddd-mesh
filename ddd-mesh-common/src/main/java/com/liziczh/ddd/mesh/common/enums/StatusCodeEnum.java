@@ -3,26 +3,26 @@ package com.liziczh.ddd.mesh.common.enums;
 import java.util.Objects;
 
 /**
- * 逻辑删除枚举
+ * 状态码枚举
  *
  * @author chenzhehao
  * @version 1.0
  * @description
  * @date 2022/1/16 12:50 下午
  */
-public enum DeletedEnum {
-    NORMAL(0, "正常"),
-    DELETED(1, "删除");
+public enum StatusCodeEnum {
+    SUCCESS("100200", "成功"),
+    ERROR("100500", "系统错误");
 
-    private Integer code;
+    private String code;
     private String desc;
 
-    DeletedEnum(Integer code, String desc) {
+    StatusCodeEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -30,9 +30,9 @@ public enum DeletedEnum {
         return desc;
     }
 
-    public static DeletedEnum getEnum(Integer code) {
+    public static StatusCodeEnum getEnum(Integer code) {
         if (Objects.nonNull(code)) {
-            for (DeletedEnum value : DeletedEnum.values()) {
+            for (StatusCodeEnum value : StatusCodeEnum.values()) {
                 if (value.getCode().equals(code)) {
                     return value;
                 }
@@ -40,6 +40,4 @@ public enum DeletedEnum {
         }
         return null;
     }
-
-
 }

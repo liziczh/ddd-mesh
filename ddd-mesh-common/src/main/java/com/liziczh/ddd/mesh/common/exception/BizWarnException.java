@@ -1,10 +1,6 @@
 package com.liziczh.ddd.mesh.common.exception;
 
 /**
- * 用户操作异常
- */
-
-/**
  * 业务WARN异常
  *
  * @author chenzhehao
@@ -13,7 +9,7 @@ package com.liziczh.ddd.mesh.common.exception;
  * @date 2021/7/17 21:52
  */
 public class BizWarnException extends BaseException {
-    private static final long serialVersionUID = -2999713747880719040L;
+    private static final long serialVersionUID = -6620154554283372520L;
 
     public BizWarnException() {
         super();

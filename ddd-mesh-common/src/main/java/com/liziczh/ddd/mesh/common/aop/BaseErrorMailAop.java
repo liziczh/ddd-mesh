@@ -10,6 +10,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
+import com.liziczh.ddd.mesh.common.util.JsonUtils;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Aspect
 public abstract class BaseErrorMailAop {
+
     @Pointcut("execution(public * com.liziczh..*.*(..))")
     public void serviceException() {
     }
@@ -46,7 +49,7 @@ public abstract class BaseErrorMailAop {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
         try {
-            this.sendErrorMessage(exception, className, methodName, JsonUtils.toJSONString(args), new Date());
+            this.sendErrorMessage(exception, className, methodName, JsonUtils.toJson(args), new Date());
         } catch (Exception e) {
             log.debug(e.getMessage(), e);
         }

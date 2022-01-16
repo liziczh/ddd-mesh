@@ -19,7 +19,5 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-
-
     </dependencies>
 </project>
