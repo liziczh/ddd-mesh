@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
+    <!-- Spring项目名称 -->
     <springProperty scope="context" name="projectName" source="spring.application.name"/>
-    <property name="liziczh.logger" value="DEBUG"/>
 
-    <!-- 控制台 -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %caller{1} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/opt/logs/${projectName}/${projectName}.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/opt/logs/${projectName}/${projectName}-%d{yyyy-MM}.%i.log.gz</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>300MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <!-- 环境配置 -->
+    <!-- Spring环境配置 -->
+    <springProfile name="dev" default="true">
+        <root level="ERROR">
+            <appender-ref ref="file"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
     <springProfile name="test" default="true">
         <root level="ERROR">
             <appender-ref ref="file"/>
@@ -43,16 +29,275 @@
         </root>
     </springProfile>
 
-    <logger name="org.apache" level="WARN"/>
+    <!-- 日志格式定义 -->
+    <property name="ENCODER_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{reqId}] [%X{ip}] %-5level %logger{5}: %msg%n"/>
 
-    <logger name="java.sql.Connection" level="WARN"/>
-    <logger name="java.sql.Statement" level="WARN"/>
-    <logger name="java.sql.PreparedStatement" level="WARN"/>
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
 
-    <logger name="org.springframework.validation" level="WARN"/>
-    <logger name="org.springframework" level="WARN"/>
-    <logger name="org.mybatis" level="WARN"/>
+    <!-- Warn日志输出 -->
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-warn.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-    <logger name="com.liziczh" level="${liziczh.logger}"/>
-    <logger name="org.apache.kafka" level="WARN"/>
+    <!-- Error日志输出 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-error.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Fatal日志输出 -->
+    <appender name="FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-fatal.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-fatal.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>FATAL</level>
+        </filter>
+    </appender>
+
+    <!-- APP模块日志输出 -->
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/${projectName}-app.log</file>
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 外部服务调用日志输出 -->
+    <appender name="REF" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-ref.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-ref.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <!-- DAO日志输出 -->
+    <appender name="DAO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-dao.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-dao.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <!-- SQL日志输出 -->
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-sql.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <!-- Redis日志输出 -->
+    <appender name="REDIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-redis.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-redis.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <!-- MQ日志输出 -->
+    <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-mq.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-mq.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <!-- 业务日志输出 -->
+    <appender name="BIZ" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>log/${projectName}-biz.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/${projectName}-biz.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </root>
+
+    <logger name="org.springframework" level="INFO"/>
+
+    <logger name="com.liziczh" level="INFO" additivity="false">
+        <appender-ref ref="BIZ"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.app" level="INFO" additivity="false">
+        <appender-ref ref="APP"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.ref" level="INFO" additivity="false">
+        <appender-ref ref="REF"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.dao" level="INFO" additivity="false">
+        <appender-ref ref="DAO"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.dao" level="INFO" additivity="false">
+        <appender-ref ref="SQL"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.redis" level="INFO" additivity="false">
+        <appender-ref ref="REDIS"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
+    <logger name="com.liziczh.ddd.mesh.mq" level="INFO" additivity="false">
+        <appender-ref ref="MQ"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="FATAL"/>
+    </logger>
+
 </configuration>
