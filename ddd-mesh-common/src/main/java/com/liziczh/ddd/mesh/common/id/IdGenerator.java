@@ -1,14 +1,12 @@
-/**
- * Baidu.com Inc.
- * Copyright (c) 2021 All Rights Reserved.
- */
 package com.liziczh.ddd.mesh.common.id;
 
-import com.liziczh.ddd.mesh.common.util.HostUtils;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import com.liziczh.base.common.util.HostUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * ID生成器
@@ -22,24 +20,21 @@ import javax.annotation.PostConstruct;
 @Component
 public class IdGenerator {
 
-    /**
-     * 机器ID
-     */
+    private static volatile SnowFlakeIdWorker instance;
     private long workId;
-    /**
-     * 数据中心ID
-     */
     private long dataCenterId;
+
+    public static void main(String[] args) {
+        IdGenerator idGenerator = new IdGenerator();
+        idGenerator.init();
+        System.out.println(idGenerator.getId());
+    }
 
     @PostConstruct
     public void init() {
-        // 根据HostName初始化机器ID
-        this.workId = Math.abs(HostUtils.getHostname().hashCode() % 10000);
-        // 根据IP初始化数据中心ID
-        this.dataCenterId = Math.abs(HostUtils.getIp().hashCode() % 10000);
+        this.workId = this.getWorkId();
+        this.dataCenterId = this.getDataCenterId();
     }
-
-    private static volatile SnowFlakeIdWorker instance;
 
     public SnowFlakeIdWorker getInstance() {
         if (instance == null) {
@@ -61,6 +56,16 @@ public class IdGenerator {
      */
     public long getId() {
         return this.getInstance().nextId();
+    }
+
+    private Integer getWorkId() {
+        int hashCode = HostUtils.getHostname().hashCode();
+        return Math.abs(hashCode % 10000);
+    }
+
+    private Integer getDataCenterId() {
+        int hashCode = HostUtils.getIp().hashCode();
+        return Math.abs(hashCode % 10000);
     }
 
 }

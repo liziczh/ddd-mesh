@@ -1,6 +1,12 @@
 package com.liziczh.ddd.mesh.mq.config;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -10,24 +16,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaAdmin;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author zhehao.chen
+ * KafkaConfig
+ *
+ * @author chenzhehao
+ * @version 1.0
+ * @description
+ * @date 2022/1/16 12:11 上午
  */
 @Slf4j
 @Configuration
 public class KafkaConfig {
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
+
     @Value("${spring.kafka.init.create-topics}")
     private String createTopics;
+
     @Value("${spring.kafka.init.partition-num:1}")
     private String partitionNum;
+
     @Value("${spring.kafka.init.replication-factor:1}")
     private String replicationFactor;
 

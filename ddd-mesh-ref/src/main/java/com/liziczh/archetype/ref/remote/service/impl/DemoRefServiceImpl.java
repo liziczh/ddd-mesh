@@ -1,27 +1,31 @@
-package com.liziczh.archetype.ref.service.impl;
+package com.liziczh.archetype.ref.remote.service.impl;
 
-import com.liziczh.archetype.ref.config.RefContextHelper;
-import com.liziczh.archetype.ref.service.DemoRefService;
-import com.liziczh.ddd.mesh.common.util.JsonUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.liziczh.archetype.ref.remote.service.DemoRefService;
+import com.liziczh.ddd.mesh.common.util.JsonUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Component
 public class DemoRefServiceImpl implements DemoRefService {
-    @Autowired
-    private RefContextHelper helper;
+
+    @Value("${archetype.web}")
+    private String archetypeWeb;
+
     @Autowired
     private RestTemplate restTemplate;
 
     @Override
     public String hello() {
-        String url = helper.getProperty("ARCHETYPE_WEB.DEMO.HELLO");
+        String url = "http://" + archetypeWeb + "/demo/hello";
         ResponseEntity<String> httpEntity = restTemplate.getForEntity(url, String.class);
-        log.info(JsonUtils.toJSONString(httpEntity));
+        log.info(JsonUtils.toJson(httpEntity));
         return httpEntity.getBody();
     }
 }

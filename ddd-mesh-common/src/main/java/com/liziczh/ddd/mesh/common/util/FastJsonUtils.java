@@ -1,32 +1,25 @@
 package com.liziczh.ddd.mesh.common.util;
 
+import java.util.List;
+import java.util.Map;
+
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.JSONLibDataFormatSerializer;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * common
+ * FastJsonUtils
  *
  * @author chenzhehao
  * @version 1.0
  * @description
- * @date 2021/7/17 21:52
+ * @date 2022/1/16 12:11 上午
  */
 public class FastJsonUtils {
-    private static final SerializeConfig CONFIG;
 
-    static {
-        CONFIG = new SerializeConfig();
-        // 使用和json-lib兼容的日期输出格式
-        CONFIG.put(java.util.Date.class, new JSONLibDataFormatSerializer());
-        // 使用和json-lib兼容的日期输出格式
-        CONFIG.put(java.sql.Date.class, new JSONLibDataFormatSerializer());
-    }
+    private static final SerializeConfig CONFIG;
 
     private static final SerializerFeature[] FEATURES = {
             // 输出空置字段
@@ -41,97 +34,74 @@ public class FastJsonUtils {
             SerializerFeature.WriteNullStringAsEmpty
     };
 
+    static {
+        CONFIG = new SerializeConfig();
+        // 使用和json-lib兼容的日期输出格式
+        CONFIG.put(java.util.Date.class, new JSONLibDataFormatSerializer());
+        // 使用和json-lib兼容的日期输出格式
+        CONFIG.put(java.sql.Date.class, new JSONLibDataFormatSerializer());
+    }
+
     /**
-     * object to jsonString
+     * 对象转Json
      *
-     * @param object object
-     * @return json
+     * @param object
+     * @return java.lang.String
+     * @author chenzhehao
+     * @date 2022/1/16 2:16 上午
      */
     public static String toJson(Object object) {
         return JSON.toJSONString(object, CONFIG, FEATURES);
     }
 
     /**
-     * object to jsonString no features
+     * Json转对象
      *
-     * @param object object
-     * @return json
+     * @param json
+     * @param clazz
+     * @return T
+     * @author chenzhehao
+     * @date 2022/1/16 2:16 上午
      */
-    public static String toJsonNoFeatures(Object object) {
-        return JSON.toJSONString(object, CONFIG);
+    public static <T> T parseObject(String json, Class<T> clazz) {
+        return JSON.parseObject(json, clazz);
     }
 
     /**
-     * jsonString to object
+     * Json转对象
      *
-     * @param jsonString jsonString
-     * @return object
+     * @param json
+     * @param typeReference
+     * @return T
+     * @author chenzhehao
+     * @date 2022/1/16 2:16 上午
      */
-    public static Object parseObject(String jsonString) {
-        return JSON.parse(jsonString);
+    public static <T> T parseObject(String json, TypeReference<T> typeReference) {
+        return JSON.parseObject(json, typeReference);
     }
 
     /**
-     * jsonString to object
+     * Json转List
      *
-     * @param <T>        object genericity
-     * @param jsonString jsonString
-     * @param clazz      object
-     * @return object
+     * @param json
+     * @param element
+     * @return java.util.List<T>
+     * @author chenzhehao
+     * @date 2022/1/16 2:18 上午
      */
-    public static <T> T parseObject(String jsonString, Class<?> clazz) {
-        return (T) JSON.parseObject(jsonString, clazz);
+    public static <T> List<T> parseList(String json, Class<T> element) {
+        return JSON.parseArray(json, element);
     }
 
     /**
-     * jsonString to Array
+     * Json转Map
      *
-     * @param jsonString jsonString
-     * @param clazz      Array
-     * @return object[]
-     */
-    public static <T> Object[] parseArray(String jsonString, Class<T> clazz) {
-        return JSON.parseArray(jsonString, clazz).toArray();
-    }
-
-    /**
-     * jsonString to Array
-     *
-     * @param jsonString jsonString
-     * @return
-     */
-    public static <T> Object[] parseArray(String jsonString) {
-        return parseArray(jsonString, null);
-    }
-
-    /**
-     * jsonString to List
-     *
-     * @param jsonString jsonString
-     * @param clazz      Class
-     * @return List
-     */
-    public static <T> List<T> parseList(String jsonString, Class<T> clazz) {
-        return JSON.parseArray(jsonString, clazz);
-    }
-
-    /**
-     * json to map
-     *
-     * @param json json
-     * @return map
+     * @param json
+     * @return java.util.Map<K, V>
+     * @author chenzhehao
+     * @date 2022/1/16 2:20 上午
      */
     public static <K, V> Map<K, V> parseMap(String json) {
-        return (Map<K, V>) JSONObject.parseObject(json);
-    }
-
-    /**
-     * map to jsonString
-     *
-     * @param map map
-     * @return jsonString
-     */
-    public static <K, V> String mapToJsonString(Map<K, V> map) {
-        return JSONObject.toJSONString(map);
+        return (Map<K, V>) JSON.parseObject(json);
     }
 }

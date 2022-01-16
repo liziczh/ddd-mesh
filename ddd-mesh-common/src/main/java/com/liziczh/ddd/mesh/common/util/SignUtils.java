@@ -1,9 +1,13 @@
 package com.liziczh.ddd.mesh.common.util;
 
-import org.springframework.util.DigestUtils;
-
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.util.DigestUtils;
 
 /**
  * 签名生成与校验
@@ -11,7 +15,7 @@ import java.util.*;
  * @author chenzhehao
  * @version 1.0
  * @description
- * @date 2021/7/17 21:52
+ * @date 2022/1/16 12:11 上午
  */
 public class SignUtils {
     /**
@@ -19,7 +23,9 @@ public class SignUtils {
      *
      * @param paramMap 参数
      * @param cipher   密钥
-     * @return 签名
+     * @return java.lang.String
+     * @author chenzhehao
+     * @date 2022/1/16 2:11 上午
      */
     public static String generateSign(Map<String, Object> paramMap, String cipher) {
         return DigestUtils.md5DigestAsHex(ksort(kfilter(paramMap), cipher).getBytes());
@@ -31,7 +37,9 @@ public class SignUtils {
      * @param paramMap 参数
      * @param cipher   密钥
      * @param sign     签名
-     * @return 签名验证结果
+     * @return boolean
+     * @author chenzhehao
+     * @date 2022/1/16 2:12 上午
      */
     public static boolean checkSign(Map<String, Object> paramMap, String cipher, String sign) {
         String from = String.valueOf(paramMap.get("from"));
@@ -43,7 +51,9 @@ public class SignUtils {
      *
      * @param paramMap 参数
      * @param cipher   密钥
-     * @return 参数排序串
+     * @return java.lang.String
+     * @author chenzhehao
+     * @date 2022/1/16 2:12 上午
      */
     public static String ksort(Map<String, Object> paramMap, String cipher) {
         List<String> keys = new ArrayList<String>(paramMap.keySet());
@@ -69,6 +79,9 @@ public class SignUtils {
      *
      * @param paramMap 参数
      * @return 过滤后的参数Map
+     * @return java.util.Map<java.lang.String, java.lang.Object>
+     * @author chenzhehao
+     * @date 2022/1/16 2:12 上午
      */
     private static Map<String, Object> kfilter(Map<String, Object> paramMap) {
         Map<String, Object> paramFilterMap = new HashMap<>();

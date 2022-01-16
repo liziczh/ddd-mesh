@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * common
+ * 响应体
  *
  * @author chenzhehao
  * @version 1.0

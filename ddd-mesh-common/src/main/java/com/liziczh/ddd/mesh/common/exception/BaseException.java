@@ -12,7 +12,6 @@ import lombok.Data;
  */
 @Data
 public abstract class BaseException extends RuntimeException {
-    private static final long serialVersionUID = -6912830046396198904L;
 
     private String code;
 

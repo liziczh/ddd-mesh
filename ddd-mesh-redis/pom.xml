@@ -10,7 +10,7 @@
     <artifactId>ddd-mesh-redis</artifactId>
 
     <dependencies>
-        <!--common-->
+        <!--module-->
         <dependency>
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>

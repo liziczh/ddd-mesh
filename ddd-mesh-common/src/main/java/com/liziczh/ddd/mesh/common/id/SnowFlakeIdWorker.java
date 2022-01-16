@@ -10,23 +10,13 @@ import lombok.extern.slf4j.Slf4j;
  * @element 时间戳差值：41位（当前时间截 - 开始时间截）；
  * @element 数据机器位：10位（5位datacenterId 和 5位workerId）；
  * @element 序列位：12位（）；
- * <p>
- * 雪花
- * @author chenzhehao
- * @date 2021/6/24 3:13 下午
- * <p>
- * 雪花
- * @author chenzhehao
- * @date 2021/6/24 3:13 下午
  */
 
 /**
- * 雪花算法
+ * 雪花
  *
  * @author chenzhehao
- * @version 1.0
- * @description
- * @date 2021/7/17 21:52
+ * @date 2021/6/24 3:13 下午
  */
 @Slf4j
 public class SnowFlakeIdWorker {

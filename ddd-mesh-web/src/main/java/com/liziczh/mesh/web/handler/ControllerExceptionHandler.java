@@ -2,7 +2,7 @@ package com.liziczh.base.mvc.handler;
 
 import com.liziczh.ddd.mesh.common.exception.BizInfoException;
 import com.liziczh.ddd.mesh.common.response.Response;
-import com.liziczh.ddd.mesh.common.util.JsonUtils;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

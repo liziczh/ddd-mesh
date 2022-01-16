@@ -1,8 +1,8 @@
 package com.liziczh.ddd.mesh.common.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Random;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 随机字符串
@@ -10,11 +10,10 @@ import java.util.Random;
  * @author chenzhehao
  * @version 1.0
  * @description
- * @date 2021/7/17 21:52
+ * @date 2022/1/16 12:11 上午
  */
 @Slf4j
 public class RandomUtils {
-
     private static final String LOWERCASE_LETTER_POOL = "abcdefghijklmnopqrstuvwxyz";
     private static final String CAPITAL_LETTER_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBER_POOL = "0123456789";

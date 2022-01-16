@@ -21,7 +21,7 @@
         </dependency>
     </dependencies>
 
-    <!--构建管理-->
+    <!--Maven构建管理-->
     <build>
         <!--项目包名-->
         <finalName>${project.artifactId}-${project.version}</finalName>
@@ -41,7 +41,6 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-
         <!--Maven插件-->
         <plugins>
             <plugin>
@@ -66,7 +65,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-
         <!--Maven 插件管理-->
         <pluginManagement>
             <plugins>
@@ -131,6 +129,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
