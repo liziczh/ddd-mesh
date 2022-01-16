@@ -17,9 +17,12 @@ import com.liziczh.ddd.mesh.common.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 异常通知
+ * Controller异常转换
  *
- * @author zhehao.chen
+ * @author chenzhehao
+ * @version 1.0
+ * @description
+ * @date 2022/1/16 12:50 下午
  */
 @Slf4j
 @ControllerAdvice

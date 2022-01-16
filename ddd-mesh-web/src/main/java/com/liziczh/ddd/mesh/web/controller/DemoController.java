@@ -24,7 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 逻辑删除枚举
+ * 示例Controller
  *
  * @author chenzhehao
  * @version 1.0
