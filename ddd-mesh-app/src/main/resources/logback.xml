@@ -47,10 +47,6 @@
 
     <!-- Warn日志输出 -->
     <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <encoder>
-            <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
         <file>log/${projectName}-warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-warn.log.%d{yyyy-MM-dd}</fileNamePattern>
@@ -62,14 +58,14 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-    </appender>
-
-    <!-- Error日志输出 -->
-    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- Error日志输出 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-error.log.%d{yyyy-MM-dd}
@@ -82,14 +78,14 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-    </appender>
-
-    <!-- Fatal日志输出 -->
-    <appender name="FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- Fatal日志输出 -->
+    <appender name="FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-fatal.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-fatal.log.%d{yyyy-MM-dd}
@@ -100,15 +96,15 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>FATAL</level>
         </filter>
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
     </appender>
 
     <!-- APP模块日志输出 -->
     <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-app.log</file>
-        <encoder>
-            <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}.log.%d{yyyy-MM-dd}
             </fileNamePattern>
@@ -120,14 +116,14 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-    </appender>
-
-    <!-- 外部服务调用日志输出 -->
-    <appender name="REF" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- 外部服务调用日志输出 -->
+    <appender name="REF" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-ref.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-ref.log.%d{yyyy-MM-dd}
@@ -140,14 +136,14 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
-    </appender>
-
-    <!-- DAO日志输出 -->
-    <appender name="DAO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- DAO日志输出 -->
+    <appender name="DAO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-dao.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-dao.log.%d{yyyy-MM-dd}
@@ -160,14 +156,14 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
-    </appender>
-
-    <!-- SQL日志输出 -->
-    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- SQL日志输出 -->
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-sql.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-sql.log.%d{yyyy-MM-dd}
@@ -180,14 +176,14 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
-    </appender>
-
-    <!-- Redis日志输出 -->
-    <appender name="REDIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- Redis日志输出 -->
+    <appender name="REDIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-redis.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-redis.log.%d{yyyy-MM-dd}
@@ -200,14 +196,14 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
-    </appender>
-
-    <!-- MQ日志输出 -->
-    <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- MQ日志输出 -->
+    <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-mq.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-mq.log.%d{yyyy-MM-dd}
@@ -220,14 +216,14 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
-    </appender>
-
-    <!-- 业务日志输出 -->
-    <appender name="BIZ" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+    </appender>
+
+    <!-- 业务日志输出 -->
+    <appender name="BIZ" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>log/${projectName}-biz.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>log/${projectName}-biz.log.%d{yyyy-MM-dd}
@@ -240,6 +236,10 @@
             <onMatch>ACCEPT</onMatch>
             <OnMismatch>DENY</OnMismatch>
         </filter>
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
     </appender>
 
     <root level="INFO">
