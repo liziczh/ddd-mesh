@@ -1,11 +1,11 @@
-package com.liziczh.ddd.mesh.application.convertor;
+package com.liziczh.ddd.mesh.service.convertor;
 
 import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.liziczh.ddd.mesh.application.bo.DemoBO;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
+import com.liziczh.ddd.mesh.service.bo.DemoBO;
 
 /**
  * common

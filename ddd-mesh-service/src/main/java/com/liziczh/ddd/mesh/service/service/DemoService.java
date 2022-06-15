@@ -1,12 +1,12 @@
-package com.liziczh.ddd.mesh.application.service;
+package com.liziczh.ddd.mesh.service.service;
 
 import java.util.List;
 
 import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
 import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
-import com.liziczh.ddd.mesh.application.bo.DemoBO;
-import com.liziczh.ddd.mesh.application.bo.DemoOptBO;
+import com.liziczh.ddd.mesh.service.bo.DemoBO;
+import com.liziczh.ddd.mesh.service.bo.DemoOptBO;
 
 public interface DemoService {
 

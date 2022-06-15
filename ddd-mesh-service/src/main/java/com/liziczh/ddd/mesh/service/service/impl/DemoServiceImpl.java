@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.application.service.impl;
+package com.liziczh.ddd.mesh.service.service.impl;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
 import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
-import com.liziczh.ddd.mesh.application.bo.DemoBO;
-import com.liziczh.ddd.mesh.application.bo.DemoOptBO;
-import com.liziczh.ddd.mesh.application.convertor.DemoBOConvertor;
-import com.liziczh.ddd.mesh.application.service.DemoService;
 import com.liziczh.ddd.mesh.common.response.ResponseBuilder;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
 import com.liziczh.ddd.mesh.domain.repository.DemoRepository;
+import com.liziczh.ddd.mesh.service.bo.DemoBO;
+import com.liziczh.ddd.mesh.service.bo.DemoOptBO;
+import com.liziczh.ddd.mesh.service.convertor.DemoBOConvertor;
+import com.liziczh.ddd.mesh.service.service.DemoService;
 
 import lombok.extern.slf4j.Slf4j;
 

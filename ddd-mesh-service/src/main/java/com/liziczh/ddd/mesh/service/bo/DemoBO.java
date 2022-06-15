@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.application.bo;
+package com.liziczh.ddd.mesh.service.bo;
 
 import lombok.Data;
 
