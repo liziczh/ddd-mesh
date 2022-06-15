@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.liziczh.ddd.mesh.api.dto.DemoDTO;
+import com.liziczh.ddd.mesh.application.bo.DemoBO;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
 
 /**
@@ -16,10 +16,10 @@ import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
  * @date 2022/6/15 7:13 下午
  */
 @Mapper(componentModel = "spring")
-public interface DemoDTOConvertor {
+public interface DemoBOConvertor {
 
-    DemoDTO toDTO(DemoEntity entity);
+    DemoBO toBO(DemoEntity entity);
 
-    List<DemoDTO> toDTOList(List<DemoEntity> entityList);
+    List<DemoBO> toBOList(List<DemoEntity> entityList);
 
 }

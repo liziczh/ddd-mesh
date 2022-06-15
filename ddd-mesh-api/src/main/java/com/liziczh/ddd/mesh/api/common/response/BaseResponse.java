@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.api.response;
+package com.liziczh.ddd.mesh.api.common.response;
 
 import lombok.Data;
 

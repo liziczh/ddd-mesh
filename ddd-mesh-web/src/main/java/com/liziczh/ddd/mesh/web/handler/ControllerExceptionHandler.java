@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.liziczh.ddd.mesh.api.response.BaseResponse;
+import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.common.enums.StatusCodeEnum;
 import com.liziczh.ddd.mesh.common.exception.BizErrorException;
 import com.liziczh.ddd.mesh.common.exception.BizInfoException;
@@ -62,7 +62,7 @@ public class ControllerExceptionHandler {
      *
      * @param code
      * @param msg
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<java.lang.Void>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<java.lang.Void>
      * @author chenzhehao
      * @date 2022/1/16 10:10 下午
      */

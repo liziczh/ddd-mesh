@@ -15,8 +15,9 @@
         <module>ddd-mesh-api</module>
         <module>ddd-mesh-common</module>
         <module>ddd-mesh-app</module>
-        <module>ddd-mesh-application</module>
         <module>ddd-mesh-web</module>
+        <module>ddd-mesh-application</module>
+        <module>ddd-mesh-service</module>
         <module>ddd-mesh-domain</module>
         <module>ddd-mesh-dao</module>
         <module>ddd-mesh-redis</module>
@@ -99,12 +100,17 @@
             </dependency>
             <dependency>
                 <groupId>com.liziczh</groupId>
+                <artifactId>ddd-mesh-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.liziczh</groupId>
                 <artifactId>ddd-mesh-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.liziczh</groupId>
-                <artifactId>ddd-mesh-web</artifactId>
+                <artifactId>ddd-mesh-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

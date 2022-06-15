@@ -1,6 +1,6 @@
 package com.liziczh.ddd.mesh.common.response;
 
-import com.liziczh.ddd.mesh.api.response.BaseResponse;
+import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.common.enums.StatusCodeEnum;
 
 import lombok.Data;
@@ -20,7 +20,7 @@ public class ResponseBuilder<T> {
      * 通用操作成功
      *
      * @param
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<T>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<T>
      * @author chenzhehao
      * @date 2022/1/16 9:47 下午
      */
@@ -34,7 +34,7 @@ public class ResponseBuilder<T> {
      * 通用操作成功
      *
      * @param data
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<T>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<T>
      * @author chenzhehao
      * @date 2022/1/16 9:47 下午
      */
@@ -49,7 +49,7 @@ public class ResponseBuilder<T> {
      * 通用系统错误
      *
      * @param
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<T>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<T>
      * @author chenzhehao
      * @date 2022/1/16 9:47 下午
      */
@@ -63,7 +63,7 @@ public class ResponseBuilder<T> {
      * 自定义错误
      *
      * @param codeCodeEnum
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<T>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<T>
      * @author chenzhehao
      * @date 2022/1/16 9:47 下午
      */

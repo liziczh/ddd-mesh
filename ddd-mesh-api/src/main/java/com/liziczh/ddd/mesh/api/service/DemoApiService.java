@@ -1,13 +1,14 @@
 package com.liziczh.ddd.mesh.api.service;
 
-import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
-import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
-import com.liziczh.ddd.mesh.api.dto.DemoDTO;
-import com.liziczh.ddd.mesh.api.response.BaseResponse;
-
 import java.util.List;
 
-public interface DemoService {
+import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
+import com.liziczh.ddd.mesh.api.dto.DemoDTO;
+import com.liziczh.ddd.mesh.api.dto.DemoOptDTO;
+import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
+import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
+
+public interface DemoApiService {
 
     /**
      * 分页条件查询
@@ -17,7 +18,7 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:37 上午
      */
-    BaseResponse<List<DemoDTO>> queryPage(DemoQueryReq req) throws Exception;
+    BaseResponse<List<DemoDTO>> queryPage(DemoQueryReq req);
 
     /**
      * 查询单个实体信息
@@ -27,7 +28,7 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:41 上午
      */
-    BaseResponse<DemoDTO> getDemo(Long demoId) throws Exception;
+    BaseResponse<DemoDTO> getDemo(Long demoId);
 
     /**
      * 新增实体
@@ -37,27 +38,27 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:41 上午
      */
-    BaseResponse<DemoDTO> addDemo(DemoCommandReq req) throws Exception;
+    BaseResponse<DemoOptDTO> addDemo(DemoCommandReq req);
 
     /**
      * 更新实体
      *
      * @param demo
-     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
      * @author chenzhehao
      * @date 2022/1/17 12:53 上午
      */
-    BaseResponse<DemoDTO> updateDemo(DemoCommandReq demo) throws Exception;
+    BaseResponse<DemoOptDTO> updateDemo(DemoCommandReq demo);
 
-   /**
-    * 删除实体
-    *
-    * @param demoId
-    * @return com.liziczh.ddd.mesh.api.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
-    * @author chenzhehao
-    * @date 2022/1/17 12:53 上午
-    */
-    BaseResponse<DemoDTO> deleteDemo(Long demoId) throws Exception;
+    /**
+     * 删除实体
+     *
+     * @param demoId
+     * @return com.liziczh.ddd.mesh.api.common.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+     * @author chenzhehao
+     * @date 2022/1/17 12:53 上午
+     */
+    BaseResponse<DemoOptDTO> deleteDemo(Long demoId);
 
     /**
      * 外部服务调用测试

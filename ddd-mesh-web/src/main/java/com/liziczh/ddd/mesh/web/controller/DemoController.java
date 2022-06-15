@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
+import com.liziczh.ddd.mesh.api.dto.DemoDTO;
+import com.liziczh.ddd.mesh.api.dto.DemoOptDTO;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
 import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
-import com.liziczh.ddd.mesh.api.dto.DemoDTO;
-import com.liziczh.ddd.mesh.api.response.BaseResponse;
-import com.liziczh.ddd.mesh.api.service.DemoService;
+import com.liziczh.ddd.mesh.api.service.DemoApiService;
 import com.liziczh.ddd.mesh.common.response.ResponseBuilder;
 import com.liziczh.ddd.mesh.redis.service.DemoRedisService;
 
@@ -37,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
 public class DemoController {
 
     @Autowired
-    private DemoService demoService;
+    private DemoApiService demoService;
 
     @Autowired
     private DemoRedisService demoRedisService;
@@ -50,36 +51,37 @@ public class DemoController {
 
     @ApiOperation(value = "分页条件查询", notes = "分页条件查询")
     @PostMapping(value = "/page")
-    public BaseResponse<List<DemoDTO>> queryPage(@RequestBody DemoQueryReq req) throws Exception {
+    public BaseResponse<List<DemoDTO>> queryPage(@RequestBody DemoQueryReq req) {
         return demoService.queryPage(req);
     }
 
     @ApiOperation(value = "查询详情接口", notes = "获取接口")
     @GetMapping(value = "/get/{demoId}")
-    public BaseResponse<DemoDTO> geDemoDTO(@PathVariable Long demoId) throws Exception {
+    public BaseResponse<DemoDTO> geDemoDTO(@PathVariable Long demoId) {
         return demoService.getDemo(demoId);
     }
 
     @ApiOperation(value = "新增接口", notes = "新增接口")
     @PostMapping(value = "/add")
-    public BaseResponse<DemoDTO> addDemo(@RequestBody DemoCommandReq req) throws Exception {
+    public BaseResponse<DemoOptDTO> addDemo(@RequestBody DemoCommandReq req) {
         return demoService.addDemo(req);
     }
 
     @ApiOperation(value = "更新接口", notes = "更新接口")
     @PutMapping(value = "update")
-    public BaseResponse<DemoDTO> updateDemo(@RequestBody DemoCommandReq req) throws Exception {
+    public BaseResponse<DemoOptDTO> updateDemo(@RequestBody DemoCommandReq req) {
         return demoService.updateDemo(req);
     }
+
     @ApiOperation(value = "删除接口", notes = "删除接口")
     @DeleteMapping(value = "/delete/{demoId}")
-    public BaseResponse<DemoDTO> deleteDemo(@PathVariable Long demoId) throws Exception {
+    public BaseResponse<DemoOptDTO> deleteDemo(@PathVariable Long demoId) {
         return demoService.deleteDemo(demoId);
     }
 
     @ApiOperation(value = "缓存", notes = "缓存")
     @GetMapping(value = "/cache/{key}/{value}")
-    public BaseResponse<Void> cache(@PathVariable String key, @PathVariable String value) throws Exception {
+    public BaseResponse<Void> cache(@PathVariable String key, @PathVariable String value) {
         demoRedisService.setValue(key, value);
         return ResponseBuilder.success();
     }
