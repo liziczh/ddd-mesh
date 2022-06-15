@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
+<configuration debug="true">
     <!-- Spring项目名称 -->
     <springProperty scope="context" name="projectName" source="spring.application.name"/>
-
-    <!-- Spring环境配置 -->
-    <springProfile name="dev" default="true">
-        <root level="ERROR">
-            <appender-ref ref="file"/>
-            <appender-ref ref="console"/>
-        </root>
-    </springProfile>
-    <springProfile name="test" default="true">
-        <root level="ERROR">
-            <appender-ref ref="file"/>
-            <appender-ref ref="console"/>
-        </root>
-    </springProfile>
-    <springProfile name="uat">
-        <root level="ERROR">
-            <appender-ref ref="file"/>
-            <appender-ref ref="console"/>
-        </root>
-    </springProfile>
-    <springProfile name="product">
-        <root level="ERROR">
-            <appender-ref ref="file"/>
-            <appender-ref ref="console"/>
-        </root>
-    </springProfile>
 
     <!-- 日志格式定义 -->
     <property name="ENCODER_PATTERN"

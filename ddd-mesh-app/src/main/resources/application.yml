@@ -44,16 +44,6 @@ spring:
       web-stat-filter:
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
-
-# log
-logging:
-  level:
-    root: info
-  config: classpath:logback.xml
-  file:
-    name: /opt/logs/${spring.application.name}/${spring.application.name}.log
-
-
 # SpringBootActuator
 management:
   endpoints:
