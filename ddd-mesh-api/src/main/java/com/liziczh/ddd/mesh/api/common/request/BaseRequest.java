@@ -3,7 +3,7 @@ package com.liziczh.ddd.mesh.api.common.request;
 import lombok.Data;
 
 /**
- * 响应体
+ * 请求体
  *
  * @author chenzhehao
  * @version 1.0
