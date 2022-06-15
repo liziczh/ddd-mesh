@@ -36,21 +36,21 @@
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <withJansi>true</withJansi>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
         <encoder>
             <pattern>${ENCODER_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
-        </filter>
     </appender>
 
     <!-- Warn日志输出 -->
     <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-warn.log</file>
+        <file>log/warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-warn.log.%d{yyyy-MM-dd}</fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <fileNamePattern>log/warn.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -64,15 +64,18 @@
         </encoder>
     </appender>
 
-    <!-- Error日志输出 -->
+    <!--Error日志输出-->
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-error.log</file>
+        <file>log/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-error.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/error.log.%d{yyyy-MM-dd}
             </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <maxHistory>7</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
@@ -84,34 +87,17 @@
         </encoder>
     </appender>
 
-    <!-- Fatal日志输出 -->
-    <appender name="FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-fatal.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-fatal.log.%d{yyyy-MM-dd}
-            </fileNamePattern>
-            <maxHistory>15</maxHistory>
-            <totalSizeCap>20GB</totalSizeCap>
-        </rollingPolicy>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>FATAL</level>
-        </filter>
-        <encoder>
-            <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
-    <!-- APP模块日志输出 -->
+    <!-- APP -->
     <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-app.log</file>
+        <file>log/app.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/app.log.%d{yyyy-MM-dd.HH}
             </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <!-- 如果当前是按小时保存，则保存168小时(=7天)内的日志 -->
+            <maxHistory>168</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
@@ -124,11 +110,12 @@
 
     <!-- 外部服务调用日志输出 -->
     <appender name="REF" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-ref.log</file>
+        <file>log/sal.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-ref.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/sal.log.%d{yyyy-MM-dd.HH}
             </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <!-- 如果当前是按小时保存，则保存168小时(=7天)内的日志 -->
+            <maxHistory>168</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -144,11 +131,12 @@
 
     <!-- DAO日志输出 -->
     <appender name="DAO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-dao.log</file>
+        <file>log/dal.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-dao.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/dal.log.%d{yyyy-MM-dd.HH}
             </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <!-- 如果当前是按小时保存，则保存168小时(=7天)内的日志 -->
+            <maxHistory>168</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -164,11 +152,12 @@
 
     <!-- SQL日志输出 -->
     <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-sql.log</file>
+        <file>log/sql.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-sql.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/sql.log.%d{yyyy-MM-dd}
             </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <!-- 如果当前是按小时保存，则保存168小时(=7天)内的日志 -->
+            <maxHistory>7</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -184,12 +173,11 @@
 
     <!-- Redis日志输出 -->
     <appender name="REDIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-redis.log</file>
+        <file>log/redis.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-redis.log.%d{yyyy-MM-dd}
-            </fileNamePattern>
-            <maxHistory>15</maxHistory>
-            <totalSizeCap>20GB</totalSizeCap>
+            <fileNamePattern>log/redis.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -204,9 +192,9 @@
 
     <!-- MQ日志输出 -->
     <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-mq.log</file>
+        <file>log/mq.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-mq.log.%d{yyyy-MM-dd}
+            <fileNamePattern>log/mq.log.%d{yyyy-MM-dd}
             </fileNamePattern>
             <maxHistory>15</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
@@ -224,11 +212,11 @@
 
     <!-- 业务日志输出 -->
     <appender name="BIZ" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${projectName}-biz.log</file>
+        <file>log/biz.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/${projectName}-biz.log.%d{yyyy-MM-dd}
-            </fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <fileNamePattern>log/biz.log.%d{yyyy-MM-dd.HH}</fileNamePattern>
+            <!-- 如果当前是按小时保存，则保存168小时(=7天)内的日志 -->
+            <maxHistory>168</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -246,7 +234,6 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </root>
 
     <logger name="org.springframework" level="INFO"/>
@@ -255,49 +242,42 @@
         <appender-ref ref="BIZ"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.app" level="INFO" additivity="false">
         <appender-ref ref="APP"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.ref" level="INFO" additivity="false">
         <appender-ref ref="REF"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.dao" level="INFO" additivity="false">
         <appender-ref ref="DAO"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.dao" level="INFO" additivity="false">
         <appender-ref ref="SQL"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.redis" level="INFO" additivity="false">
         <appender-ref ref="REDIS"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
     <logger name="com.liziczh.ddd.mesh.mq" level="INFO" additivity="false">
         <appender-ref ref="MQ"/>
         <appender-ref ref="WARN"/>
         <appender-ref ref="ERROR"/>
-        <appender-ref ref="FATAL"/>
     </logger>
 
 </configuration>
