@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.ref.remote.service;
+package com.liziczh.ddd.mesh.ref.demo;
 
 public interface DemoRefService {
     /**

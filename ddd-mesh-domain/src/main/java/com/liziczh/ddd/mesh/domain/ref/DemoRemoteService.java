@@ -11,7 +11,7 @@ import com.liziczh.ddd.mesh.domain.data.DemoExternalDO;
  * @description
  * @date 2021/7/18 1:47
  */
-public interface DemoExternalService {
+public interface DemoRemoteService {
 
     /**
      * 调用外部服务接口
@@ -19,6 +19,6 @@ public interface DemoExternalService {
      * @author chenzhehao
      * @date 2021/7/18 1:50
      */
-    DemoExternalDO callExternalService(DemoDO demoDO);
+    DemoExternalDO callRemoteService(DemoDO demoDO);
 
 }

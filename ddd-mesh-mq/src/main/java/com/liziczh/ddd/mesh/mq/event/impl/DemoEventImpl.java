@@ -5,8 +5,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.liziczh.ddd.mesh.common.util.JsonUtils;
-import com.liziczh.ddd.mesh.domain.event.DemoEvent;
 import com.liziczh.ddd.mesh.domain.data.DemoEventDO;
+import com.liziczh.ddd.mesh.domain.event.DemoEvent;
 
 /**
  * Demo事件发送
@@ -23,8 +23,8 @@ public class DemoEventImpl implements DemoEvent {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
-    public void publishEvent(DemoEventDO eventVO) {
+    public void publishEvent(DemoEventDO eventDO) {
         String topic = "test_topic";
-        kafkaTemplate.send(topic, JsonUtils.toJson(eventVO));
+        kafkaTemplate.send(topic, JsonUtils.toJson(eventDO));
     }
 }

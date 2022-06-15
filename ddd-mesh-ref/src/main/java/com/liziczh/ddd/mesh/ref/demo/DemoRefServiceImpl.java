@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.ref.remote.service.impl;
+package com.liziczh.ddd.mesh.ref.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.liziczh.ddd.mesh.common.util.JsonUtils;
-import com.liziczh.ddd.mesh.ref.remote.service.DemoRefService;
 
 import lombok.extern.slf4j.Slf4j;
 

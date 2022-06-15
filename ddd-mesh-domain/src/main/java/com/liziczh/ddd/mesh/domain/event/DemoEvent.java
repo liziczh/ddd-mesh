@@ -18,6 +18,6 @@ public interface DemoEvent {
      * @author chenzhehao
      * @date 2021/7/18 1:46
      */
-    void publishEvent(DemoEventDO eventVO);
+    void publishEvent(DemoEventDO eventBO);
 
 }

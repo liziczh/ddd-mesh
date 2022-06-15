@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.liziczh.ddd.mesh.common.util.FileUtil;
 import com.liziczh.ddd.mesh.common.util.JsonUtils;
 import com.liziczh.ddd.mesh.ref.mail.dto.MailSendRequest;
 import com.liziczh.ddd.mesh.ref.mail.dto.MailSendResult;
@@ -115,7 +116,7 @@ public class MailServiceImpl implements MailService {
             // 删除临时附件
             if (!CollectionUtils.isEmpty(request.getAttachment())) {
                 for (Map.Entry<String, String> attachment : request.getAttachment().entrySet()) {
-                    this.delTempFile(attachment.getValue());
+                    FileUtil.delTempFile(attachment.getValue());
                 }
             }
         }
@@ -131,25 +132,5 @@ public class MailServiceImpl implements MailService {
                 JsonUtils.toJson(request), JsonUtils.toJson(result));
 
         return result;
-    }
-
-    /**
-     * 删除临时文件
-     *
-     * @author chenzhehao
-     * @date 2021/11/22 9:36 下午
-     */
-    public boolean delTempFile(String tempFilePath) {
-        log.info("MailService.delTempFile, start, tempFilePath={}", tempFilePath);
-        boolean deleteFlag = false;
-        File tmpFile = new File(tempFilePath);
-        if (tmpFile.exists()) {
-            deleteFlag = tmpFile.delete();
-            log.info("MailService.delTempFile, success, tempFilePath={}, deleteFlag={}", tempFilePath, deleteFlag);
-        } else {
-            log.error("MailService.delTempFile, file does not exist, tempFilePath={}", tempFilePath);
-        }
-        log.info("MailService.delTempFile end, tempFilePath={}, deleteFlag={}", tempFilePath, deleteFlag);
-        return deleteFlag;
     }
 }
