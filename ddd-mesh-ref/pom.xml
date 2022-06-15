@@ -15,17 +15,10 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-
-        <!-- mail -->
+        <!-- base -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
+            <groupId>com.liziczh</groupId>
+            <artifactId>base-ref</artifactId>
         </dependency>
-        <!-- web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
     </dependencies>
 </project>

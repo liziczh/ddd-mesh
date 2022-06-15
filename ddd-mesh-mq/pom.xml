@@ -15,20 +15,10 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-
-        <!-- kafka -->
+        <!-- base -->
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.liziczh</groupId>
+            <artifactId>base-mq</artifactId>
         </dependency>
     </dependencies>
 

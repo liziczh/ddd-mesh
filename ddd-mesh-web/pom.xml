@@ -15,17 +15,10 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-application</artifactId>
         </dependency>
-
-        <!-- web -->
+        <!-- base -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.liziczh</groupId>
+            <artifactId>base-web</artifactId>
         </dependency>
-        <!-- actuator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
     </dependencies>
 </project>
