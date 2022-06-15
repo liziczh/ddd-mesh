@@ -13,10 +13,6 @@
         <!--module-->
         <dependency>
             <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
         <dependency>
