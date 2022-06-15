@@ -13,11 +13,21 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * SwaggerConfig
+ *
+ * @author chenzhehao
+ * @version 1.0
+ * @description
+ * @date 2022/1/16 12:50 下午
+ */
 @EnableSwagger2
 @Configuration
 public class Swagger2Config {
+
     public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.liziczh";
-    public static final String PRODUCT_ENV = "product";
+    public static final String PRODUCT_ENV = "online";
+
     @Value("${spring.profiles.active}")
     private String env;
 

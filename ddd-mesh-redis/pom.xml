@@ -10,15 +10,17 @@
     <artifactId>ddd-mesh-redis</artifactId>
 
     <dependencies>
-        <!--module-->
+        <!-- module -->
         <dependency>
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-        <!--spring-redis-->
+
+        <!-- spring-redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
     </dependencies>
 </project>

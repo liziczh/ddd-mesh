@@ -48,7 +48,7 @@ public class KafkaConfig {
             for (String topicName : createTopics.split(",")) {
                 newTopics.add(new NewTopic(topicName, Integer.parseInt(partitionNum), Short.parseShort(replicationFactor)));
             }
-            AdminClient client = AdminClient.create(kafkaAdmin().getConfig());
+            AdminClient client = AdminClient.create(kafkaAdmin().getConfigurationProperties());
             client.createTopics(newTopics);
             client.close();
         }

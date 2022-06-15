@@ -13,27 +13,25 @@
         <!--module-->
         <dependency>
             <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
+
         <!-- jdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!--mysql-->
+
+        <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- druid -->
+        <!-- db connection pool -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -53,5 +51,6 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
+
     </dependencies>
 </project>

@@ -47,23 +47,6 @@ public class AppDateUtils {
     }
 
     /**
-     * 日期时间转字符串
-     *
-     * @param date    日期时间
-     * @param pattern 格式
-     * @return java.lang.String
-     * @author chenzhehao
-     * @date 2022/1/16 1:56 上午
-     */
-    public static String dateToString(Date date, String pattern) {
-        if (Objects.isNull(date) || StringUtils.isBlank(pattern)) {
-            return null;
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        return dateFormat.format(date);
-    }
-
-    /**
      * 字符串转日期时间
      *
      * @param dateStr 日期时间字符串
@@ -85,6 +68,23 @@ public class AppDateUtils {
                     dateStr, format.getPattern(), e);
         }
         return date;
+    }
+
+    /**
+     * 日期时间转字符串
+     *
+     * @param date    日期时间
+     * @param pattern 格式
+     * @return java.lang.String
+     * @author chenzhehao
+     * @date 2022/1/16 1:56 上午
+     */
+    public static String dateToString(Date date, String pattern) {
+        if (Objects.isNull(date) || StringUtils.isBlank(pattern)) {
+            return null;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        return dateFormat.format(date);
     }
 
     /**

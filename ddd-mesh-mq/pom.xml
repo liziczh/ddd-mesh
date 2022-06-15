@@ -10,16 +10,13 @@
     <artifactId>ddd-mesh-mq</artifactId>
 
     <dependencies>
-        <!--module-->
-        <dependency>
-            <groupId>com.liziczh</groupId>
-            <artifactId>ddd-mesh-common</artifactId>
-        </dependency>
+        <!-- module -->
         <dependency>
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-        <!--kafka-->
+
+        <!-- kafka -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>

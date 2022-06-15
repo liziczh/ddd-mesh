@@ -3,7 +3,7 @@ package com.liziczh.ddd.mesh.api.service;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
 import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.api.dto.DemoDTO;
-import com.liziczh.ddd.mesh.api.response.Result;
+import com.liziczh.ddd.mesh.api.response.BaseResponse;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:37 上午
      */
-    Result<List<DemoDTO>> queryPage(DemoQueryReq req) throws Exception;
+    BaseResponse<List<DemoDTO>> queryPage(DemoQueryReq req) throws Exception;
 
     /**
      * 查询单个实体信息
@@ -27,7 +27,7 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:41 上午
      */
-    Result<DemoDTO> getDemo(Long demoId) throws Exception;
+    BaseResponse<DemoDTO> getDemo(Long demoId) throws Exception;
 
     /**
      * 新增实体
@@ -37,27 +37,27 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:41 上午
      */
-    Result<DemoDTO> addDemo(DemoCommandReq req) throws Exception;
+    BaseResponse<DemoDTO> addDemo(DemoCommandReq req) throws Exception;
 
     /**
      * 更新实体
      *
      * @param demo
-     * @return com.liziczh.ddd.mesh.api.response.Result<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+     * @return com.liziczh.ddd.mesh.api.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
      * @author chenzhehao
      * @date 2022/1/17 12:53 上午
      */
-    Result<DemoDTO> updateDemo(DemoCommandReq demo) throws Exception;
+    BaseResponse<DemoDTO> updateDemo(DemoCommandReq demo) throws Exception;
 
    /**
     * 删除实体
     *
     * @param demoId
-    * @return com.liziczh.ddd.mesh.api.response.Result<com.liziczh.ddd.mesh.api.dto.DemoDTO>
+    * @return com.liziczh.ddd.mesh.api.response.BaseResponse<com.liziczh.ddd.mesh.api.dto.DemoDTO>
     * @author chenzhehao
     * @date 2022/1/17 12:53 上午
     */
-    Result<DemoDTO> deleteDemo(Long demoId) throws Exception;
+    BaseResponse<DemoDTO> deleteDemo(Long demoId) throws Exception;
 
     /**
      * 外部服务调用测试
@@ -67,5 +67,5 @@ public interface DemoService {
      * @author chenzhehao
      * @date 2022/1/17 12:53 上午
      */
-    Result<String> refTest();
+    BaseResponse<String> refTest();
 }
