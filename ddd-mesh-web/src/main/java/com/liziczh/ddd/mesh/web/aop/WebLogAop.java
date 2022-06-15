@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -26,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WebLogAop {
 
     @Pointcut("execution(public * com.liziczh..*.controller.*.*(..))")
-    public void webLogController() {
+    public void webController() {
     }
 
     /**
@@ -37,32 +36,19 @@ public class WebLogAop {
      * @author chenzhehao
      * @date 2022/1/16 8:34 下午
      */
-    @Before("webLogController()")
+    @Before("webController()")
     public void doBefore(JoinPoint joinPoint) {
-        // WebLogIgnore
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        WebLogIgnore webLogIgnore = AnnotationUtils.findAnnotation(methodSignature.getMethod(), WebLogIgnore.class);
-        if (webLogIgnore != null) {
-            return;
-        }
     }
 
     /**
      * 环绕通知
      *
-     * @param proceedingJoinPoint 切点
+     * @param joinPoint 切点
      * @return result
      * @throws Throwable
      */
-    @Around("webLogController()")
-    public Object doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        // WebLogIgnore
-        MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
-        WebLogIgnore webLogIgnore = AnnotationUtils.findAnnotation(methodSignature.getMethod(), WebLogIgnore.class);
-        if (webLogIgnore != null) {
-            // 执行方法
-            return proceedingJoinPoint.proceed();
-        }
+    @Around("webController()")
+    public Object doAroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         // 开始打印请求日志
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -77,16 +63,17 @@ public class WebLogAop {
         // 打印请求的 IP
         log.info("IP             : {}", request.getRemoteAddr());
         // 打印调用 controller 的全路径以及执行方法
-        log.info("Class Method   : {}.{}", proceedingJoinPoint.getSignature().getDeclaringTypeName(), proceedingJoinPoint.getSignature().getName());
+        log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName());
         // 打印请求入参
         String methodParams = null;
-        Object[] args = proceedingJoinPoint.getArgs();
+        Object[] args = joinPoint.getArgs();
         if (args != null && args.length > 0) {
             methodParams = JsonUtils.toJson(args);
         }
         log.info("Request Args   : {}", methodParams);
         // 执行方法
-        Object result = proceedingJoinPoint.proceed();
+        Object result = joinPoint.proceed();
         // 打印出参
         log.info("BaseResponse Args  : {}", JsonUtils.toJson(result));
         // 执行耗时
@@ -99,14 +86,8 @@ public class WebLogAop {
     /**
      * 后置通知
      */
-    @After("webLogController()")
+    @After("webController()")
     public void doAfter(JoinPoint joinPoint) {
-        // WebLogIgnore
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        WebLogIgnore webLogIgnore = AnnotationUtils.findAnnotation(methodSignature.getMethod(), WebLogIgnore.class);
-        if (webLogIgnore != null) {
-            return;
-        }
     }
 
     /**
@@ -115,16 +96,13 @@ public class WebLogAop {
      * @param joinPoint   切点
      * @param returnValue 返回值
      */
-    @AfterReturning(value = "webLogController()", returning = "returnValue")
+    @AfterReturning(value = "webController()", returning = "returnValue")
     public void doAfterReturningAdvice(JoinPoint joinPoint, Object returnValue) {
         // WebLogIgnore
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        WebLogIgnore webLogIgnore = AnnotationUtils.findAnnotation(methodSignature.getMethod(), WebLogIgnore.class);
-        if (webLogIgnore != null) {
-            return;
-        }
         // 打印调用 controller 的全路径以及执行方法
-        log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
+        log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName());
         // 打印方法返回值
         String returnValueJson = (returnValue == null) ? "null" : JsonUtils.toJson(returnValue);
         log.info("Return Value   : {}", JsonUtils.toJson(returnValueJson));
