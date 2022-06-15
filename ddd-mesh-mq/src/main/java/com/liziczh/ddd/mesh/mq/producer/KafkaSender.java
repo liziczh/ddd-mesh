@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Kafka发送示例
  *
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
  * @description
  * @date 2022/1/16 12:11 上午
  */
+@Slf4j
 @Component
 public class KafkaSender {
     @Autowired

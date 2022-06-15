@@ -1,7 +1,7 @@
 package com.liziczh.ddd.mesh.domain.ref;
 
-import com.liziczh.ddd.mesh.domain.data.DemoExternalDO;
 import com.liziczh.ddd.mesh.domain.data.DemoDO;
+import com.liziczh.ddd.mesh.domain.data.DemoExternalDO;
 
 /**
  * 外部服务调用
@@ -12,7 +12,6 @@ import com.liziczh.ddd.mesh.domain.data.DemoDO;
  * @date 2021/7/18 1:47
  */
 public interface DemoExternalService {
-
 
     /**
      * 调用外部服务接口

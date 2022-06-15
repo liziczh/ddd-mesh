@@ -29,5 +29,5 @@ public interface LockService {
      * @author chenzhehao
      * @date 2022/1/16 6:22 下午
      */
-    void releaseLock(String lock);
+    boolean releaseLock(String lock);
 }

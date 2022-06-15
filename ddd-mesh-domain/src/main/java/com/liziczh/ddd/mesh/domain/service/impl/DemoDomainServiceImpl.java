@@ -1,7 +1,8 @@
 package com.liziczh.ddd.mesh.domain.service.impl;
 
-import com.liziczh.ddd.mesh.domain.service.DemoDomainService;
 import org.springframework.stereotype.Component;
+
+import com.liziczh.ddd.mesh.domain.service.DemoDomainService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class DemoDomainServiceImpl implements DemoDomainService {
 
-	public String domainService() {
-		return null;
-	}
+    @Override
+    public String domainService() {
+        return "domainService";
+    }
 }

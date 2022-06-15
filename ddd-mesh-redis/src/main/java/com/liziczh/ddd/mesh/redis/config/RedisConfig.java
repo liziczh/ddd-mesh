@@ -22,7 +22,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
-public class RedisCustomConfig {
+public class RedisConfig {
 
     @Bean(name = "redisStringTemplate")
     public StringRedisTemplate redisCustomStringTemplate(RedisConnectionFactory redisConnectionFactory) {

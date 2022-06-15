@@ -1,22 +1,24 @@
 package com.liziczh.ddd.mesh.dao.repository.impl;
 
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.api.condition.PageCondition;
 import com.liziczh.ddd.mesh.api.condition.SortCondition;
+import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.common.enums.DeletedEnum;
+import com.liziczh.ddd.mesh.dao.convertor.DemoPOConvertor;
 import com.liziczh.ddd.mesh.dao.mapper.TDemoMapper;
 import com.liziczh.ddd.mesh.dao.po.DemoPO;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
 import com.liziczh.ddd.mesh.domain.repository.DemoRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Demo资源层实现
@@ -26,14 +28,20 @@ import com.liziczh.ddd.mesh.domain.repository.DemoRepository;
  * @description
  * @date 2021/7/18 0:26
  */
+@Slf4j
+@Repository
 public class DemoRepositoryImpl implements DemoRepository {
 
     @Autowired
     private TDemoMapper demoMapper;
 
+    @Autowired
+    private DemoPOConvertor demoPOConvertor;
+
     @Override
     public List<DemoEntity> selectByCondition(DemoQueryReq condition) {
 
+        // select
         PageCondition pageCondition = condition.getPage();
         List<SortCondition> sortConditionList = condition.getSortList();
         QueryWrapper<DemoPO> queryWrapper = new QueryWrapper<>();
@@ -44,15 +52,12 @@ public class DemoRepositoryImpl implements DemoRepository {
         for (SortCondition sortCondition : sortConditionList) {
             queryWrapper.orderByDesc(sortCondition.getColumnName());
         }
-        Page<DemoPO> demoPage = demoMapper.selectPage(new Page<>(pageCondition.getPageNo(), pageCondition.getSize()), queryWrapper);
-        List<DemoPO> records = demoPage.getRecords();
+        Page<DemoPO> demoPage = demoMapper.selectPage(new Page<>(pageCondition.getPageNo(), pageCondition.getSize()),
+                queryWrapper);
+        List<DemoPO> poList = demoPage.getRecords();
 
         // toEntity
-        List<DemoEntity> entityList = records.parallelStream().map(po -> {
-            DemoEntity entity = new DemoEntity();
-            BeanUtils.copyProperties(po, entity);
-            return entity;
-        }).collect(Collectors.toList());
+        List<DemoEntity> entityList = demoPOConvertor.toEntityList(poList);
 
         return entityList;
     }
@@ -60,55 +65,54 @@ public class DemoRepositoryImpl implements DemoRepository {
     @Override
     public DemoEntity get(Long id) {
 
+        // select
         DemoPO po = demoMapper.selectById(id);
 
         // toEntity
-        DemoEntity entity = DemoEntity.builder().build();
-        BeanUtils.copyProperties(po, entity);
+        DemoEntity entity = demoPOConvertor.toEntity(po);
 
         return entity;
     }
 
     @Override
-    public Boolean insert(DemoEntity entity) {
+    @Transactional(rollbackFor = Exception.class)
+    public void insert(DemoEntity entity) {
 
         // toPO
-        DemoPO po = new DemoPO();
-        BeanUtils.copyProperties(entity, po);
-        po.setCreateTime(new Date());
+        DemoPO po = demoPOConvertor.toPO(entity);
+
+        // insert
         int insert = demoMapper.insert(po);
-
-        if (insert >= 0) {
-            return Boolean.TRUE;
+        if (insert != 1) {
+            throw new RuntimeException("DemoRepositoryImpl.insert, error");
         }
 
-        return Boolean.FALSE;
     }
 
     @Override
-    public Boolean update(DemoEntity entity) {
+    @Transactional(rollbackFor = Exception.class)
+    public void update(DemoEntity entity) {
 
         // toPO
-        DemoPO po = new DemoPO();
-        BeanUtils.copyProperties(entity, po);
-        po.setCreateTime(new Date());
-        int update = demoMapper.updateById(po);
+        DemoPO po = demoPOConvertor.toPO(entity);
 
-        if (update >= 0) {
-            return Boolean.TRUE;
+        int update = demoMapper.updateById(po);
+        if (update != 1) {
+            throw new RuntimeException("DemoRepositoryImpl.update, error");
         }
 
-        return Boolean.FALSE;
     }
 
     @Override
-    public Boolean deleteById(Long id) {
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteById(Long id) {
+
+        // delete
         int delete = demoMapper.deleteById(id);
 
-        if (delete >= 0) {
-            return Boolean.TRUE;
+        if (delete != 1) {
+            throw new RuntimeException("DemoRepositoryImpl.deleteById, error");
         }
 
-        return Boolean.FALSE;
     }
 }

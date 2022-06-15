@@ -1,9 +1,9 @@
 package com.liziczh.ddd.mesh.domain.repository;
 
+import java.util.List;
+
 import com.liziczh.ddd.mesh.api.req.DemoQueryReq;
 import com.liziczh.ddd.mesh.domain.entity.DemoEntity;
-
-import java.util.List;
 
 /**
  * 资源层接口
@@ -37,7 +37,7 @@ public interface DemoRepository {
      * @author chenzhehao
      * @date 2021/7/18 0:35
      */
-    Boolean insert(DemoEntity entity);
+    void insert(DemoEntity entity);
 
     /**
      * 更新
@@ -45,7 +45,7 @@ public interface DemoRepository {
      * @author chenzhehao
      * @date 2021/7/18 0:36
      */
-    Boolean update(DemoEntity entity);
+    void update(DemoEntity entity);
 
     /**
      * ID删除
@@ -53,6 +53,6 @@ public interface DemoRepository {
      * @author chenzhehao
      * @date 2021/7/18 0:37
      */
-    Boolean deleteById(Long id);
+    void deleteById(Long id);
 
 }

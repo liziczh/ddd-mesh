@@ -4,9 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.liziczh.ddd.mesh.redis.constants.RedisConstants;
 import com.liziczh.ddd.mesh.redis.service.LockService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,15 +27,35 @@ import lombok.extern.slf4j.Slf4j;
 public class LockServiceImpl implements LockService {
 
     @Resource(name = "redisStringTemplate")
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public boolean tryLock(String key) {
-        return redisTemplate.opsForValue().setIfAbsent(key, null, 30, TimeUnit.SECONDS);
+        if (StringUtils.isBlank(key)) {
+            return true;
+        }
+
+        try {
+            Boolean lock = redisTemplate.opsForValue().setIfAbsent(key, 1, RedisConstants.LOCK_TIME, TimeUnit.SECONDS);
+            return BooleanUtils.isTrue(lock);
+        } catch (Exception e) {
+            log.error("LockServiceImpl.tryLock, error", e);
+            return false;
+        }
+
     }
 
     @Override
-    public void releaseLock(String key) {
-        redisTemplate.delete(key);
+    public boolean releaseLock(String key) {
+        if (StringUtils.isBlank(key)) {
+            return true;
+        }
+        try {
+            Boolean delete = redisTemplate.delete(key);
+            return BooleanUtils.isTrue(delete);
+        } catch (Exception e) {
+            log.error("LockServiceImpl.releaseLock, error", e);
+            return false;
+        }
     }
 }

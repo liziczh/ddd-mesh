@@ -1,4 +1,4 @@
-package com.liziczh.ddd.mesh.redis.api;
+package com.liziczh.ddd.mesh.redis.constants;
 
 /**
  * RedisConstants
