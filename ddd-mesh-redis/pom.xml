@@ -15,12 +15,10 @@
             <groupId>com.liziczh</groupId>
             <artifactId>ddd-mesh-domain</artifactId>
         </dependency>
-
         <!-- base -->
         <dependency>
             <groupId>com.liziczh</groupId>
             <artifactId>base-redis</artifactId>
         </dependency>
-
     </dependencies>
 </project>
