@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.liziczh.ddd.mesh.common.util.JsonUtils;
+import com.liziczh.base.common.util.JsonUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

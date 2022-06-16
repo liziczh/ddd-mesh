@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
+import com.liziczh.base.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.api.dto.DemoDTO;
 import com.liziczh.ddd.mesh.api.dto.DemoOptDTO;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;

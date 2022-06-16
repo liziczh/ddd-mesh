@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.liziczh.ddd.mesh.api.common.response.BaseResponse;
+import com.liziczh.base.api.common.response.BaseResponse;
 import com.liziczh.ddd.mesh.api.dto.DemoDTO;
 import com.liziczh.ddd.mesh.api.dto.DemoOptDTO;
 import com.liziczh.ddd.mesh.api.req.DemoCommandReq;
@@ -31,7 +31,6 @@ public class DemoApiServiceImpl implements DemoApiService {
     @Override
     public BaseResponse<List<DemoDTO>> queryPage(DemoQueryReq req) {
         BaseResponse<List<DemoBO>> response = demoService.queryPage(req);
-
         return ResponseBuilder.success(demoApiConvertor.toDTOList(response.getData()));
     }
 
